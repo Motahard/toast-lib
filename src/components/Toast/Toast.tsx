@@ -18,7 +18,7 @@ import {
   Title,
   Description,
   CloseButton
-} from '@src/components/Toast/styled'
+} from '@components/Toast/styled'
 
 export const Toast: React.FC<ICreateToast> = ({
     id, 

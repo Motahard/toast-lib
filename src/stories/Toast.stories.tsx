@@ -1,7 +1,7 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { Toast } from "../components/Toast/Toast";
-import { ContainerForToasts } from "../components/ToastContainer/styled";
+import React from "react"
+import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Toast } from "@components/Toast"
+import { ContainerForToasts } from "@components/ToastContainer/styled"
 
 export default {
     title: 'Toast',

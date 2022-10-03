@@ -27,7 +27,6 @@
         "@typescript-eslint"
     ],
     "rules": {
-        // "linebreak-style": ["error", "windows"],
         "eol-last": ["error", "never"],
         "arrow-parens": ["error", "as-needed"],
 		"semi": "error",

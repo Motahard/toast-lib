@@ -47,12 +47,12 @@ export interface IStyledToast {
 }
 
 export interface IStyledToastWrapper extends IStyledToast {
-position: string
-animation?: string
-backgroundColor?: string
-textColor?: string
+  position: string
+  animation?: string
+  backgroundColor?: string
+  textColor?: string
 }
 
 export interface IStyledToastText extends IStyledToast{
-textColor?: string
+  textColor?: string
 }

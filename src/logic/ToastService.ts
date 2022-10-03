@@ -1,6 +1,5 @@
 import { v4 as uuid } from 'uuid'
-import { IRefUpdate, IToast } from '@src/interfaces/index';
-import { toastsList } from '@src/data/toasts';
+import { IRefUpdate, IToast } from '@src/interfaces';
 import { Delays } from '@src/constants';
 
 export class ToastService {

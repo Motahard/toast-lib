@@ -14,6 +14,7 @@ module.exports = {
     config.resolve.alias = {
       ...config.resolve.alias,
       '@src': path.resolve(__dirname, "../src"),
+      '@components': path.resolve(__dirname, "../src/components"),
     };
 
     return config;

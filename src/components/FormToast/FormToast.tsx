@@ -1,6 +1,6 @@
 import { Delays } from '@src/constants'
 import { instanceToast } from '@src/logic/ToastService'
-import React, { ChangeEvent, Component, FormEvent, FormEventHandler, MouseEvent } from 'react'
+import React, { ChangeEvent, Component, FormEvent } from 'react'
 import { IToast } from '@src/interfaces'
 
 interface IProps {}
@@ -35,6 +35,7 @@ export default class FormToast extends Component<IProps, IState> {
         e.preventDefault()
         instanceToast.generateToast({...this.state})
     }
+    
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
