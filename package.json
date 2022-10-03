@@ -3,24 +3,31 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
-  "author": "Alexander Makarchik",
+  "author": {
+    "name": "Alexander Makarchik"
+  },
   "license": "MIT",
   "scripts": {
     "start": "rollup -c rollup.config.js -w",
+    "build": "rollup -c",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "chromatic": "npx chromatic --project-token=be381029ef33",
+    "test": "jest"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.6"
   },
   "devDependencies": {
     "@babel/core": "^7.19.0",
+    "@babel/preset-env": "^7.19.3",
     "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-image": "^2.1.1",
@@ -36,13 +43,17 @@
     "@storybook/manager-webpack4": "^6.5.12",
     "@storybook/react": "^6.5.12",
     "@storybook/testing-library": "^0.0.13",
+    "@types/jest": "^29.1.0",
     "@types/react": "^18.0.19",
     "@types/react-dom": "^18.0.6",
+    "@types/react-test-renderer": "^18.0.0",
     "@types/styled-components": "^5.1.26",
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.0.0",
+    "babel-jest": "^29.1.0",
     "babel-loader": "^8.2.5",
+    "chromatic": "^6.9.0",
     "eslint": "8.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
@@ -52,8 +63,10 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "7.28.0",
     "eslint-plugin-react-hooks": "4.3.0",
+    "jest": "^29.1.1",
     "postcss": "^8.4.16",
     "prettier": "^2.7.1",
+    "react-test-renderer": "^18.2.0",
     "rollup": "^2.79.0",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-peer-deps-external": "^2.2.4",
@@ -65,5 +78,7 @@
     "tslib": "^2.4.0",
     "typescript": "^4.8.3",
     "uuid": "^9.0.0"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "toast-lib@1.0.0"
 }

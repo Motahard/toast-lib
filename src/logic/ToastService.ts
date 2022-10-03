@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid'
-import { IRefUpdate, IToast } from '@src/models/index';
+import { IRefUpdate, IToast } from '@src/interfaces/index';
 import { toastsList } from '@src/data/toasts';
-import { DEFAULT_DELAY_DELETE } from '@src/constants';
+import { Delays } from '@src/constants';
 
 export class ToastService {
     private static instance: ToastService;
@@ -9,7 +9,7 @@ export class ToastService {
     refUpdate: IRefUpdate
 
     constructor() {
-        this.toasts = toastsList;
+        this.toasts = []
         this.refUpdate = { handleUpdate() {} }
     }
 
@@ -42,7 +42,7 @@ export class ToastService {
         this.refUpdate?.handleUpdate()
     }
 
-    public removeToastWithDelay = (toastToDeleteID: string, delayForDelete: number = DEFAULT_DELAY_DELETE): void => {
+    public removeToastWithDelay = (toastToDeleteID: string, delayForDelete: number = Delays.DEFAULT_DELAY_DELETE): void => {
         setTimeout(() => {
             this.toasts = this.toasts.filter(
                 toast => toast.id !== toastToDeleteID

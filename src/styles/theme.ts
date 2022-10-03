@@ -1,6 +1,22 @@
 import { css } from 'styled-components'
 
-import { DefaultTheme } from '@src/models'
+import { DefaultTheme } from '@src/interfaces'
+
+import error from '../assets/svg/error.svg'
+import info from '../assets/svg/info.svg'
+import success from '../assets/svg/success.svg'
+import warning from '../assets/svg/warning.svg'
+import closeWhite from '../assets/svg/closeWhite.svg'
+import closeBlack from '../assets/svg/closeBlack.svg'
+
+export const svgObj = {
+	error,
+	info,
+	success,
+	warning,
+	closeWhite,
+	closeBlack
+}
 
 const white = '#FFFFFF'
 const black = '#000000'

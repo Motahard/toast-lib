@@ -1,25 +1,16 @@
-import {
-	FROM_BOTTOM,
-	FROM_LEFT,
-	FROM_RIGHT,
-	FROM_TOP,
-	TO_BOTTOM,
-	TO_LEFT,
-	TO_RIGHT,
-	TO_TOP,
-} from '@src/constants'
+import { Animations } from '@src/constants'
 
 export const changeAnimation = (currentAnimation: string): string => {
 	switch (currentAnimation) {
-		case FROM_LEFT:
-			return TO_LEFT
-		case FROM_RIGHT:
-			return TO_RIGHT
-		case FROM_TOP:
-			return TO_TOP
-		case FROM_BOTTOM:
-			return TO_BOTTOM
+		case Animations.FROM_LEFT:
+			return Animations.TO_LEFT
+		case Animations.FROM_RIGHT:
+			return Animations.TO_RIGHT
+		case Animations.FROM_TOP:
+			return Animations.TO_TOP
+		case Animations.FROM_BOTTOM:
+			return Animations.TO_BOTTOM
 		default:
-			return TO_LEFT
+			return Animations.TO_LEFT
 	}
 }

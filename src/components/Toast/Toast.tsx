@@ -1,22 +1,14 @@
 import React, { MouseEvent, useEffect, useState } from 'react'
 import { ThemeProvider } from 'styled-components'
 
-import { 
-  DEFAULT_ANIM_DELAY, 
-  DEFAULT_DELAY_DELETE, 
-  FROM_BOTTOM, 
-  FROM_LEFT, 
-  FROM_RIGHT, 
-  FROM_TOP,
-  LEFT_TOP, 
-  LEFT_BOTTOM,
-  RIGHT_TOP,
-  RIGHT_BOTTOM 
-} from '@src/constants'
-
 import { instanceToast } from '@src/logic/ToastService'
-import { ICreateToast } from '@src/models'
+import { 
+  Delays,
+  Animations,
+  Positions
+} from '@src/constants'
 import { changeAnimation } from '@src/helpers/utils'
+import { ICreateToast } from '@src/interfaces'
 
 import { defaultTheme } from '@src/styles/theme'
 import {
@@ -26,7 +18,7 @@ import {
   Title,
   Description,
   CloseButton
-} from '@src/components/Toast/styles'
+} from '@src/components/Toast/styled'
 
 export const Toast: React.FC<ICreateToast> = ({
     id, 
@@ -34,22 +26,30 @@ export const Toast: React.FC<ICreateToast> = ({
     title, 
     description, 
     autoDelete = false, 
-    delayForDelete = DEFAULT_DELAY_DELETE,
+    delayForDelete = Delays.DEFAULT_DELAY_DELETE,
     position, 
-    animation
+    animation,
+    backgroundColor,
+    textColor,
+    story = false
   }) => {
     const [currentAnimation, setCurrentAnimation] = useState(animation)
+    const [show, setShow] = useState(true)
     let positionX: number
     let positionY: number
 
     useEffect(() => {
       if(autoDelete) {
-        instanceToast.removeToastWithDelay(id, delayForDelete)
+        if(story) {
+          setTimeout(() => setShow(false), delayForDelete)
+        } else {
+          instanceToast.removeToastWithDelay(id, delayForDelete)
+        }
         
         const changeAnimTimeout = 
         setTimeout(() => {
           setCurrentAnimation(changeAnimation(currentAnimation))
-        }, delayForDelete - DEFAULT_ANIM_DELAY)
+        }, delayForDelete - Delays.DEFAULT_ANIM_DELAY)
 
         return () => clearTimeout(changeAnimTimeout)
       }
@@ -58,8 +58,9 @@ export const Toast: React.FC<ICreateToast> = ({
     const handleDelete = () => {
       setCurrentAnimation(changeAnimation(currentAnimation))
       setTimeout(() => {
+        if(story) setShow(false)
         instanceToast.removeToast(id)
-      }, DEFAULT_ANIM_DELAY)
+      }, Delays.DEFAULT_ANIM_DELAY)
     }
 
     const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
@@ -68,17 +69,17 @@ export const Toast: React.FC<ICreateToast> = ({
     }
 
     const handleMouseUp = (e: MouseEvent<HTMLDivElement>) => {
-      if (position === LEFT_TOP || position === LEFT_BOTTOM) {
+      if (position === Positions.LEFT_TOP || position === Positions.LEFT_BOTTOM) {
         switch (animation) {
-          case FROM_LEFT: {
+          case Animations.FROM_LEFT: {
             positionX > e.clientX && handleDelete()
             break
           }
-          case FROM_TOP: {
+          case Animations.FROM_TOP: {
             positionY > e.clientY && handleDelete()
             break
           }
-          case FROM_BOTTOM: {
+          case Animations.FROM_BOTTOM: {
             positionY < e.clientY && handleDelete()
             break
           }
@@ -86,17 +87,17 @@ export const Toast: React.FC<ICreateToast> = ({
             break
         }
       }
-      else if (position === RIGHT_TOP || position === RIGHT_BOTTOM) {
+      else if (position === Positions.RIGHT_TOP || position === Positions.RIGHT_BOTTOM) {
         switch (animation) {
-          case FROM_RIGHT: {
+          case Animations.FROM_RIGHT: {
             positionX < e.clientX && handleDelete()
             break
           }
-          case FROM_TOP: {
+          case Animations.FROM_TOP: {
             positionY > e.clientY && handleDelete()
             break
           }
-          case FROM_BOTTOM: {
+          case Animations.FROM_BOTTOM: {
             positionY < e.clientY && handleDelete()
             break
           }
@@ -106,17 +107,21 @@ export const Toast: React.FC<ICreateToast> = ({
       }
     }
 
+    if(!show) {
+      return null
+    }
     return (
       <ThemeProvider theme={defaultTheme}>
         <ToastWrapper 
           type={type} 
+          backgroundColor={backgroundColor}
           position={position} 
           animation={currentAnimation}
           onMouseUp={handleMouseUp}
 				  onMouseDown={handleMouseDown}
         >
           <Logo type={type}/>
-          <TextContainer type={type}>
+          <TextContainer type={type} textColor={textColor}>
             <Title>
               {title}
             </Title>

@@ -1,17 +1,13 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react'
 
 import { instanceToast } from '@src/logic/ToastService'
-import { 
-  FROM_LEFT,
-	FROM_RIGHT,
-	LEFT_BOTTOM,
-	LEFT_TOP } from '@src/constants'
+import { Positions, Animations } from '@src/constants'
 
-import { IToastContainer } from '@src/models'
+import { IToastContainer } from '@src/interfaces'
 
-import { Portal } from '@src/components/Portal'
-import { Toast } from '@src/components/Toast'
-import { ContainerForToasts } from '@src/components/ToastContainer/styles'
+import { Portal } from '@src/components/Portal/Portal'
+import { Toast } from '@src/components/Toast/Toast'
+import { ContainerForToasts } from '@src/components/ToastContainer/styled'
 
 export const ToastContainer = forwardRef((props: IToastContainer, ref) => {
   const toastsList = instanceToast.getAllToasts()
@@ -25,24 +21,26 @@ export const ToastContainer = forwardRef((props: IToastContainer, ref) => {
     handleUpdate: handleUpdate
   }))
 
-  const settedPosition: string = props.position ? props.position : LEFT_TOP
-
+  const settedPosition: string = props.position ? props.position : Positions.LEFT_TOP
+  const settedSpace: string = props.space ? props.space : '0'
 	let settedAnimation: string = ''
-	if (settedPosition === LEFT_TOP || settedPosition === LEFT_BOTTOM) {
-		settedAnimation = props.animation ? props.animation : FROM_LEFT
+
+	if (settedPosition === Positions.LEFT_TOP || settedPosition === Positions.LEFT_BOTTOM) {
+		settedAnimation = props.animation ? props.animation : Animations.FROM_LEFT
 	} else {
-		settedAnimation = props.animation ? props.animation : FROM_RIGHT
+		settedAnimation = props.animation ? props.animation : Animations.FROM_RIGHT
 	}
 
   return (
     <Portal>
-      <ContainerForToasts position={settedPosition}>
+      <ContainerForToasts position={settedPosition} space={settedSpace}>
         {
           toastsList.map(toast => (
             <Toast 
               key={toast.id}
               position={settedPosition}
               animation={settedAnimation}
+              space={settedSpace}
               {...toast}
             />
           ))

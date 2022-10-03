@@ -1,1 +1,1 @@
-export * from '@components/Toast/Toast'
+export * from './Toast'

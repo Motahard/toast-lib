@@ -13,8 +13,6 @@ import url from '@rollup/plugin-url';
 import typescriptPaths from "rollup-plugin-typescript-paths";
 
 export default {
-  // for creating npm package
-  // input: "src/toast-lib.ts",
   input: "src/index.tsx",
   output: {
     file: "dist/bundle.js",
@@ -22,6 +20,7 @@ export default {
     sourcemap: true,
   },
   // for creating npm package
+  // input: "src/toast-lib.ts",
   // output: [
   //   {
   //     file: "dist/index.js",
@@ -45,7 +44,10 @@ export default {
       'process.env.NODE_ENV': JSON.stringify( 'development' )
     }),
     babel({
-      presets: ["@babel/preset-react"],
+      presets: [
+        '@babel/preset-typescript',
+        ['@babel/preset-react', {runtime: 'automatic'}],
+      ],
     }),
     commonjs(),
     typescript(),
