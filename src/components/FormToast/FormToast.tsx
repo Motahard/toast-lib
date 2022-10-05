@@ -1,6 +1,6 @@
+import React, { ChangeEvent, Component, FormEvent } from 'react'
 import { Delays } from '@src/constants'
 import { instanceToast } from '@src/logic/ToastService'
-import React, { ChangeEvent, Component, FormEvent } from 'react'
 import { IToast } from '@src/interfaces'
 
 interface IProps {}
