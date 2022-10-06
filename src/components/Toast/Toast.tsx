@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect, useState } from 'react'
+import React, { MouseEvent, useEffect, useRef, useState } from 'react'
 import { ThemeProvider } from 'styled-components'
 
 import { instanceToast } from '@src/logic/ToastService'
@@ -7,7 +7,7 @@ import {
   Animations,
   Positions
 } from '@src/constants'
-import { changeAnimation } from '@src/helpers/utils'
+import { changeAnimation } from '@src/utils'
 import { ICreateToast } from '@src/interfaces'
 
 import { defaultTheme } from '@src/styles/theme'
@@ -35,8 +35,10 @@ export const Toast: React.FC<ICreateToast> = ({
   }) => {
     const [currentAnimation, setCurrentAnimation] = useState(animation)
     const [show, setShow] = useState(true)
-    let positionX: number
-    let positionY: number
+    const changeAnimTimeout: { current: NodeJS.Timeout | null } = useRef(null)
+
+    let positionX = useRef<number>()
+    let positionY = useRef<number>()
 
     useEffect(() => {
       if(autoDelete) {
@@ -46,12 +48,12 @@ export const Toast: React.FC<ICreateToast> = ({
           instanceToast.removeToastWithDelay(id, delayForDelete)
         }
         
-        const changeAnimTimeout = 
+        changeAnimTimeout.current = 
         setTimeout(() => {
           setCurrentAnimation(changeAnimation(currentAnimation))
         }, delayForDelete - Delays.DEFAULT_ANIM_DELAY)
 
-        return () => clearTimeout(changeAnimTimeout)
+        return () => clearTimeout(changeAnimTimeout.current as NodeJS.Timeout)
       }
     }, [])
     
@@ -64,23 +66,24 @@ export const Toast: React.FC<ICreateToast> = ({
     }
 
     const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
-      positionX = e.clientX
-      positionY = e.clientY
+      positionX.current = e.clientX
+      positionY.current = e.clientY
     }
 
     const handleMouseUp = (e: MouseEvent<HTMLDivElement>) => {
+      if(!positionX.current || !positionY.current) return
       if (position === Positions.LEFT_TOP || position === Positions.LEFT_BOTTOM) {
         switch (animation) {
           case Animations.FROM_LEFT: {
-            positionX > e.clientX && handleDelete()
+            positionX.current > e.clientX && handleDelete()
             break
           }
           case Animations.FROM_TOP: {
-            positionY > e.clientY && handleDelete()
+            positionY.current > e.clientY && handleDelete()
             break
           }
           case Animations.FROM_BOTTOM: {
-            positionY < e.clientY && handleDelete()
+            positionY.current < e.clientY && handleDelete()
             break
           }
           default:
@@ -90,15 +93,15 @@ export const Toast: React.FC<ICreateToast> = ({
       else if (position === Positions.RIGHT_TOP || position === Positions.RIGHT_BOTTOM) {
         switch (animation) {
           case Animations.FROM_RIGHT: {
-            positionX < e.clientX && handleDelete()
+            positionX.current < e.clientX && handleDelete()
             break
           }
           case Animations.FROM_TOP: {
-            positionY > e.clientY && handleDelete()
+            positionY.current > e.clientY && handleDelete()
             break
           }
           case Animations.FROM_BOTTOM: {
-            positionY < e.clientY && handleDelete()
+            positionY.current < e.clientY && handleDelete()
             break
           }
           default:

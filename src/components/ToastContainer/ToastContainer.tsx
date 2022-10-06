@@ -5,7 +5,7 @@ import { Positions, Animations } from '@src/constants'
 
 import { IToastContainer } from '@src/interfaces'
 
-import { Portal } from '@src/components/Portal/Portal'
+import { Portal } from '@src/Portal'
 import { Toast } from '@src/components/Toast/Toast'
 import { ContainerForToasts } from '@src/components/ToastContainer/styled'
 

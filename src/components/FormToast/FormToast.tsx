@@ -1,13 +1,13 @@
 import React, { ChangeEvent, Component, FormEvent } from 'react'
 import { Delays } from '@src/constants'
 import { instanceToast } from '@src/logic/ToastService'
-import { IToast } from '@src/interfaces'
+import { IFormToastProps, IFormToastState } from '@src/interfaces'
+import { InputGroup } from '@components/InputGroup'
+import { SelectGroup } from '@components/SelectGroup'
+import { Form, Button } from '@components/FormToast/styled'
 
-interface IProps {}
-interface IState extends Omit<IToast, 'id'> {}
-
-export default class FormToast extends Component<IProps, IState> {  
-    constructor(props: IProps) {
+export default class FormToast extends Component<IFormToastProps, IFormToastState> {  
+    constructor(props: IFormToastProps) {
         super(props)
         this.state = {
             type: 'success',
@@ -27,7 +27,7 @@ export default class FormToast extends Component<IProps, IState> {
         } else {
             this.setState({
                 [name]: value
-            } as Pick<IState, any>)
+            } as Pick<IFormToastState, any>)
         }
     }
 
@@ -38,89 +38,66 @@ export default class FormToast extends Component<IProps, IState> {
     
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <div>
-                    <label htmlFor="type">Type Toast*</label>
-                    <select
-                       name="type" 
-                       id="type" 
-                       onChange={this.handleChange} 
-                       value={this.state.type}
-                    >
-                        <option value="success">Success</option>
-                        <option value="info">Information</option>
-                        <option value="warning">Warning</option>
-                        <option value="error">Error</option>
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor="title">Toast Title*</label>
-                    <input 
-                        type="text" 
-                        id='title'
-                        name='title' 
-                        placeholder='Title'
-                        value={this.state.title}
-                        onChange={this.handleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="description">Toast Description (optional)</label>
-                    <input 
-                        type="text" 
-                        id='description' 
-                        name='description' 
-                        placeholder='Description'
-                        value={this.state.description}
-                        onChange={this.handleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="backgroundColor">Background Color (optional)</label>
-                    <input 
-                        type="text" 
-                        id='backgroundColor' 
-                        name='backgroundColor' 
-                        placeholder='Background color'
-                        value={this.state.backgroundColor}
-                        onChange={this.handleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="textColor">Text Color (optional)</label>
-                    <input 
-                        type="text" 
-                        id='textColor' 
-                        name='textColor' 
-                        placeholder='Text color'
-                        value={this.state.textColor}
-                        onChange={this.handleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="autoDelete">Auto delete</label>
-                    <input 
-                        type="checkbox" 
-                        id="autoDelete" 
-                        name='autoDelete'
-                        onChange={this.handleChange}
-                        checked={this.state.autoDelete}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="delayForDelete">Delay For Delete</label>
-                    <input 
-                        type="text"
-                        id="delayForDelete" 
-                        name='delayForDelete'
-                        value={this.state.delayForDelete}
-                        onChange={this.handleChange}
-                     />
-                </div>
-                <button type='submit'>
+            <Form onSubmit={this.handleSubmit}>
+                <SelectGroup 
+                    name='type' 
+                    values={['success', 'info', 'warning', 'error']}
+                    valuesDescription={['Success', 'Information', 'Warning', 'Error']}
+                    onChange={this.handleChange}
+                    description='Type Toast*'
+                    value={this.state.type}
+                />
+                <InputGroup 
+                    type='text' 
+                    name='title' 
+                    value={this.state.title} 
+                    onChange={this.handleChange} 
+                    description='Toast Title*'
+                    placeholder='Enter toast title'
+                />
+                <InputGroup 
+                    type='text' 
+                    name='description' 
+                    value={this.state.description} 
+                    onChange={this.handleChange} 
+                    description='Toast Description (optional)'
+                    placeholder='Enter toast description'
+                />
+                <InputGroup 
+                    type='text' 
+                    name='backgroundColor' 
+                    value={this.state.backgroundColor} 
+                    onChange={this.handleChange} 
+                    description='Background Color (optional)'
+                    placeholder='Enter toast background color'
+                />
+                <InputGroup 
+                    type='text' 
+                    name='textColor' 
+                    value={this.state.textColor} 
+                    onChange={this.handleChange} 
+                    description='Text Color (optional)'
+                    placeholder='Enter toast text color'
+                />
+                <InputGroup 
+                    type='checkbox' 
+                    name='autoDelete' 
+                    value={(this.state.autoDelete)?.toString()} 
+                    onChange={this.handleChange} 
+                    description='No autodelete'
+                />
+                <InputGroup 
+                    type='text' 
+                    name='delayForDelete' 
+                    value={this.state.delayForDelete} 
+                    onChange={this.handleChange} 
+                    description='Delay For Delete'
+                    placeholder='Enter toast delay for delete'
+                />
+                <Button type='submit'>
                      Add
-                </button>
-            </form>
+                </Button>
+            </Form>
     )
   }
 }

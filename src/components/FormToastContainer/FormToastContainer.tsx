@@ -1,13 +1,9 @@
 import React, { ChangeEvent, FC } from 'react'
+import { IFormToastContainer } from '@src/interfaces'
+import { InputGroup } from '@components/InputGroup'
+import { SelectGroup } from '@components/SelectGroup'
 
-interface IProps {
-    setAnimation: (value: string) => void
-    setPosition: (value: string) => void
-    setSpace: (value: string) => void
-    space: string
-}
-
-const FormToastContainer: FC<IProps> = ({ setAnimation, setPosition, setSpace, space }) => {
+const FormToastContainer: FC<IFormToastContainer> = ({ setAnimation, setPosition, setSpace, space }) => {
     const handlePositionChange = (e: ChangeEvent<HTMLSelectElement>) => {
         const { value } = e.target
         setPosition(value)
@@ -24,45 +20,23 @@ const FormToastContainer: FC<IProps> = ({ setAnimation, setPosition, setSpace, s
     }
 
     return (
-    <div>
-        <form>
-            <div>
-                <label htmlFor='position'>Position</label>
-                <select 
-                    name='position' 
-                    id='position' 
-                    onChange={handlePositionChange}
-                >
-                    <option value='LEFT_TOP'>Left Top</option>
-                    <option value='LEFT_BOTTOM'>Left Bottom</option>
-                    <option value='RIGHT_TOP'>Right Top</option>
-                    <option value='RIGHT_BOTTOM'>Right Bottom</option>
-                </select>
-            </div>
-            <div>
-            <label htmlFor='animation'>Animation</label>
-                <select 
-                    name='animation' 
-                    id='animation' 
-                    onChange={handleAnimationChange}
-                >
-                    <option value='FROM_LEFT'>From Left</option>
-                    <option value='FROM_RIGHT'>From Right</option>
-                    <option value='FROM_TOP'>From Top</option>
-                    <option value='FROM_BOTTOM'>From Bottom</option>
-                </select>
-            </div>
-            <div>
-                <label htmlFor='space'>Toast Space (px)</label>
-                <input 
-                    type='text' 
-                    name='space' 
-                    value={space} 
-                    onChange={handleSpaceChange}
-                />
-            </div>
-        </form>
-    </div>
+        <>
+            <SelectGroup 
+                name='position' 
+                values={['LEFT_TOP', 'LEFT_BOTTOM', 'RIGHT_TOP', 'RIGHT_BOTTOM']} 
+                valuesDescription={['Left Top', 'Left Bottom', 'Right Top', 'Right Bottom']}
+                onChange={handlePositionChange}
+                description='Position'
+            />
+            <SelectGroup 
+                name='animation' 
+                values={['FROM_LEFT', 'FROM_RIGHT', 'FROM_TOP', 'FROM_BOTTOM']} 
+                valuesDescription={['From Left', 'From Right', 'From Top', 'From Bottom']}
+                onChange={handleAnimationChange}
+                description='Animation'
+            />
+            <InputGroup type='text' name='space' value={space} onChange={handleSpaceChange} description='Toast Space (px)' placeholder='Enter toast space in px'/>
+        </>
   )
 }
 

@@ -1,4 +1,4 @@
-import { changeAnimation } from "@src/helpers/utils";
+import { changeAnimation } from "@src/utils";
 
 describe("function animation changes", () => {
   test("return value to left", () => {
