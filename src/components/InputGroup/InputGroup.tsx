@@ -1,13 +1,5 @@
-import React, { FC, ChangeEvent } from 'react'
-
-interface IInputGroup {
-    type: string
-    name: string
-    value: string | undefined | number
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void
-    description: string
-    placeholder?: string
-}
+import React, { FC } from 'react'
+import { IInputGroup } from '@src/interfaces'
 
 export const InputGroup: FC<IInputGroup> = ({ type, name, value, onChange, description, placeholder }) => {
   return (
