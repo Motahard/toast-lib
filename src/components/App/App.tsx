@@ -6,8 +6,8 @@ import FormToast from '@components/FormToast/FormToast';
 import FormToastContainer from '@components/FormToastContainer/FormToastContainer';
 
 export const App = () => {
-  const [position, setPosition] = useState('LEFT_TOP')
-  const [animation, setAnimation] = useState('FROM_LEFT')
+  const [position, setPosition] = useState('RIGHT_TOP')
+  const [animation, setAnimation] = useState('FROM_RIGHT')
   const [space, setSpace] = useState('0');
 
   const toastsRef = useRef()

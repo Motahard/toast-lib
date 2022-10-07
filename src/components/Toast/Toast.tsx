@@ -66,6 +66,7 @@ export const Toast: React.FC<ICreateToast> = ({
     }
 
     const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
+      console.log(e.target)
       positionX.current = e.clientX
       positionY.current = e.clientY
     }
@@ -75,15 +76,15 @@ export const Toast: React.FC<ICreateToast> = ({
       if (position === Positions.LEFT_TOP || position === Positions.LEFT_BOTTOM) {
         switch (animation) {
           case Animations.FROM_LEFT: {
-            positionX.current > e.clientX && handleDelete()
+            if(positionX.current > e.clientX) handleDelete()
             break
           }
           case Animations.FROM_TOP: {
-            positionY.current > e.clientY && handleDelete()
+            if(positionY.current > e.clientY) handleDelete()
             break
           }
           case Animations.FROM_BOTTOM: {
-            positionY.current < e.clientY && handleDelete()
+            if(positionY.current < e.clientY) handleDelete()
             break
           }
           default:
@@ -93,15 +94,15 @@ export const Toast: React.FC<ICreateToast> = ({
       else if (position === Positions.RIGHT_TOP || position === Positions.RIGHT_BOTTOM) {
         switch (animation) {
           case Animations.FROM_RIGHT: {
-            positionX.current < e.clientX && handleDelete()
+            if(positionX.current < e.clientX) handleDelete()
             break
           }
           case Animations.FROM_TOP: {
-            positionY.current > e.clientY && handleDelete()
+            if(positionY.current > e.clientY) handleDelete()
             break
           }
           case Animations.FROM_BOTTOM: {
-            positionY.current < e.clientY && handleDelete()
+            if(positionY.current < e.clientY) handleDelete()
             break
           }
           default:

@@ -23,15 +23,15 @@ const FormToastContainer: FC<IFormToastContainer> = ({ setAnimation, setPosition
         <>
             <SelectGroup 
                 name='position' 
-                values={['LEFT_TOP', 'LEFT_BOTTOM', 'RIGHT_TOP', 'RIGHT_BOTTOM']} 
-                valuesDescription={['Left Top', 'Left Bottom', 'Right Top', 'Right Bottom']}
+                values={[ 'RIGHT_TOP', 'LEFT_TOP', 'LEFT_BOTTOM', 'RIGHT_BOTTOM']} 
+                valuesDescription={['Right Top', 'Left Top', 'Left Bottom', 'Right Bottom']}
                 onChange={handlePositionChange}
                 description='Position'
             />
             <SelectGroup 
                 name='animation' 
-                values={['FROM_LEFT', 'FROM_RIGHT', 'FROM_TOP', 'FROM_BOTTOM']} 
-                valuesDescription={['From Left', 'From Right', 'From Top', 'From Bottom']}
+                values={['FROM_RIGHT', 'FROM_LEFT', 'FROM_TOP', 'FROM_BOTTOM']} 
+                valuesDescription={['From Right', 'From Left', 'From Top', 'From Bottom']}
                 onChange={handleAnimationChange}
                 description='Animation'
             />

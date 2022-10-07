@@ -58,6 +58,9 @@ export const ToastWrapper = styled.div<IStyledToastWrapper>`
 	${toRight};
 	${fromBottom};
 	${toBottom};
+	&:active {
+		cursor: grabbing;
+	}
 `
 export const Logo = styled.div<IStyledToast>`
     height: 64px;
