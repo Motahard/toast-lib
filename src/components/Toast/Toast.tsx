@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect, useRef, useState } from 'react'
+import React, { DragEvent, MouseEvent, useEffect, useRef, useState } from 'react'
 import { ThemeProvider } from 'styled-components'
 
 import { instanceToast } from '@src/logic/ToastService'
@@ -37,8 +37,7 @@ export const Toast: React.FC<ICreateToast> = ({
     const [show, setShow] = useState(true)
     const changeAnimTimeout: { current: NodeJS.Timeout | null } = useRef(null)
 
-    let positionX = useRef<number>()
-    let positionY = useRef<number>()
+    let [positionX, setPositionX] = useState<number>()
 
     useEffect(() => {
       if(autoDelete) {
@@ -52,12 +51,11 @@ export const Toast: React.FC<ICreateToast> = ({
         setTimeout(() => {
           setCurrentAnimation(changeAnimation(currentAnimation))
         }, delayForDelete - Delays.DEFAULT_ANIM_DELAY)
-
         return () => clearTimeout(changeAnimTimeout.current as NodeJS.Timeout)
       }
-    }, [])
+    })
     
-    const handleDelete = () => {
+    const handleDeleteClick = () => {
       setCurrentAnimation(changeAnimation(currentAnimation))
       setTimeout(() => {
         if(story) setShow(false)
@@ -65,49 +63,26 @@ export const Toast: React.FC<ICreateToast> = ({
       }, Delays.DEFAULT_ANIM_DELAY)
     }
 
-    const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
-      console.log(e.target)
-      positionX.current = e.clientX
-      positionY.current = e.clientY
+    const handleDelete = () => {
+      setTimeout(() => {
+        if(story) setShow(false)
+        instanceToast.removeToast(id)
+      }, Delays.DEFAULT_ANIM_DELAY)
     }
 
-    const handleMouseUp = (e: MouseEvent<HTMLDivElement>) => {
-      if(!positionX.current || !positionY.current) return
-      if (position === Positions.LEFT_TOP || position === Positions.LEFT_BOTTOM) {
-        switch (animation) {
-          case Animations.FROM_LEFT: {
-            if(positionX.current > e.clientX) handleDelete()
-            break
-          }
-          case Animations.FROM_TOP: {
-            if(positionY.current > e.clientY) handleDelete()
-            break
-          }
-          case Animations.FROM_BOTTOM: {
-            if(positionY.current < e.clientY) handleDelete()
-            break
-          }
-          default:
-            break
-        }
-      }
-      else if (position === Positions.RIGHT_TOP || position === Positions.RIGHT_BOTTOM) {
-        switch (animation) {
-          case Animations.FROM_RIGHT: {
-            if(positionX.current < e.clientX) handleDelete()
-            break
-          }
-          case Animations.FROM_TOP: {
-            if(positionY.current > e.clientY) handleDelete()
-            break
-          }
-          case Animations.FROM_BOTTOM: {
-            if(positionY.current < e.clientY) handleDelete()
-            break
-          }
-          default:
-            break
-        }
+    const onMouseDown = (e: DragEvent<HTMLDivElement>) => {
+      e.preventDefault()
+      setPositionX(e.clientX)
+    }
+
+    const onMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+      if(!positionX || (positionX === e.clientX)) return
+      if(positionX > e.clientX) {
+        setCurrentAnimation(Animations.TO_LEFT)
+        handleDelete()
+      } else if (positionX < e.clientX) {
+        setCurrentAnimation(Animations.TO_RIGHT)
+        handleDelete()
       }
     }
 
@@ -117,12 +92,13 @@ export const Toast: React.FC<ICreateToast> = ({
     return (
       <ThemeProvider theme={defaultTheme}>
         <ToastWrapper 
+          draggable
           type={type} 
           backgroundColor={backgroundColor}
           position={position} 
           animation={currentAnimation}
-          onMouseUp={handleMouseUp}
-				  onMouseDown={handleMouseDown}
+          onMouseDown={onMouseDown}
+          onMouseMove={onMouseMove}
         >
           <Logo type={type}/>
           <TextContainer type={type} textColor={textColor}>
@@ -135,7 +111,7 @@ export const Toast: React.FC<ICreateToast> = ({
               </Description>
             )}
           </TextContainer>
-          <CloseButton onClick={handleDelete} type={type} />
+          <CloseButton onClick={handleDeleteClick} type={type} />
         </ToastWrapper>
       </ThemeProvider>
   )

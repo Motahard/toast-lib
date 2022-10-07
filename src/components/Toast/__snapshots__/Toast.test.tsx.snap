@@ -2,9 +2,10 @@
 
 exports[`rendering toast 1`] = `
 <div
-  className="sc-bcXHqe cBfWNP"
+  className="sc-bcXHqe hYzaJb"
+  draggable={true}
   onMouseDown={[Function]}
-  onMouseUp={[Function]}
+  onMouseMove={[Function]}
   type="success"
 >
   <div

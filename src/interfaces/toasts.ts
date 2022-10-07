@@ -51,6 +51,8 @@ export interface IStyledToastWrapper extends IStyledToast {
   animation?: string
   backgroundColor?: string
   textColor?: string
+  positionX?: number | undefined
+  positionY?: number | undefined
 }
 
 export interface IStyledToastText extends IStyledToast{

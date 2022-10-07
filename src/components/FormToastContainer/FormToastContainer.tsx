@@ -2,6 +2,7 @@ import React, { ChangeEvent, FC } from 'react'
 import { IFormToastContainer } from '@src/interfaces'
 import { InputGroup } from '@components/InputGroup'
 import { SelectGroup } from '@components/SelectGroup'
+import { Form } from '@components/FormToast/styled'
 
 const FormToastContainer: FC<IFormToastContainer> = ({ setAnimation, setPosition, setSpace, space }) => {
     const handlePositionChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -20,7 +21,7 @@ const FormToastContainer: FC<IFormToastContainer> = ({ setAnimation, setPosition
     }
 
     return (
-        <>
+        <Form>
             <SelectGroup 
                 name='position' 
                 values={[ 'RIGHT_TOP', 'LEFT_TOP', 'LEFT_BOTTOM', 'RIGHT_BOTTOM']} 
@@ -36,7 +37,7 @@ const FormToastContainer: FC<IFormToastContainer> = ({ setAnimation, setPosition
                 description='Animation'
             />
             <InputGroup type='text' name='space' value={space} onChange={handleSpaceChange} description='Toast Space (px)' placeholder='Enter toast space in px'/>
-        </>
+        </Form>
   )
 }
 

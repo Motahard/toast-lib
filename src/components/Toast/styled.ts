@@ -20,7 +20,8 @@ import {
 } from "@src/interfaces";
 
 export const ToastWrapper = styled.div<IStyledToastWrapper>`
-    position: relative;
+	position: relative;
+	user-select: none;
 	display: flex;
 	align-items: center;
 	margin-bottom: 10px;
@@ -31,7 +32,14 @@ export const ToastWrapper = styled.div<IStyledToastWrapper>`
 	opacity: 1;
 	padding: 16px;
 	transition: transform ${Delays.DEFAULT_ANIM_DELAY}ms ease-in;
-	cursor: grab;
+	&:hover {
+		cursor: grab;	
+		cursor: -webkit-grab;
+	}
+	&:active {
+		cursor: grabbing;
+		cursor: -webkit-grabbing;
+	}
     background: ${(props) => {
 		if(props.backgroundColor) {
 			return props.backgroundColor 
@@ -58,9 +66,6 @@ export const ToastWrapper = styled.div<IStyledToastWrapper>`
 	${toRight};
 	${fromBottom};
 	${toBottom};
-	&:active {
-		cursor: grabbing;
-	}
 `
 export const Logo = styled.div<IStyledToast>`
     height: 64px;
