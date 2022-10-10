@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC } from 'react'
-import { IFormToastContainer } from '@src/interfaces'
+import { IFormToastContainer } from '@interfaces'
 import { InputGroup } from '@components/InputGroup'
 import { SelectGroup } from '@components/SelectGroup'
 import { Form } from '@components/FormToast/styled'

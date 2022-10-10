@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Types, Delays } from '@src/constants'
+import { Types, Delays } from '@constants'
 import { 
 	font,	
 	fromBottom,
@@ -10,14 +10,14 @@ import {
 	toLeft,
 	toRight,
 	toTop,
-	svgObj
-} from '@src/styles/theme'
+	images
+} from '@styles'
 
 import { 
 	IStyledToastWrapper, 
 	IStyledToast, 
 	IStyledToastText 
-} from "@src/interfaces";
+} from "@interfaces";
 
 export const ToastWrapper = styled.div<IStyledToastWrapper>`
 	position: relative;
@@ -73,13 +73,13 @@ export const Logo = styled.div<IStyledToast>`
 	${(props) => {
 		switch (props.type) {
 			case Types.INFO:
-				return `background-image: url(${svgObj.info})`
+				return `background-image: url(${images.info})`
 			case Types.WARNING:
-				return `background-image: url(${svgObj.warning})`
+				return `background-image: url(${images.warning})`
 			case Types.ERROR:
-				return `background-image: url(${svgObj.error})`
+				return `background-image: url(${images.error})`
 			default:
-				return `background-image: url(${svgObj.success})`
+				return `background-image: url(${images.success})`
 		}
 	}};
 `
@@ -114,6 +114,6 @@ export const CloseButton = styled.div<IStyledToast>`
 	top: 27px;
 	${(props) =>
 		props.type === Types.WARNING
-			? `background-image: url(${svgObj.closeBlack});`
-			: `background-image: url(${svgObj.closeWhite});`}
+			? `background-image: url(${images.closeBlack});`
+			: `background-image: url(${images.closeWhite});`}
 `

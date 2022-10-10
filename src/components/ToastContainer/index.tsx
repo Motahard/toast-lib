@@ -1,13 +1,13 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react'
 
-import { instanceToast } from '@src/logic/ToastService'
-import { Positions, Animations } from '@src/constants'
+import { instanceToast } from '@services'
+import { Positions, Animations } from '@constants'
 
-import { IToastContainer } from '@src/interfaces'
+import { IToastContainer } from '@interfaces'
 
-import { Portal } from '@src/Portal'
-import { Toast } from '@src/components/Toast/Toast'
-import { ContainerForToasts } from '@src/components/ToastContainer/styled'
+import { Portal } from '@Portal'
+import { Toast } from '@components/Toast'
+import { ContainerForToasts } from '@components/ToastContainer/styled'
 
 export const ToastContainer = forwardRef((props: IToastContainer, ref) => {
   const toastsList = instanceToast.getAllToasts()

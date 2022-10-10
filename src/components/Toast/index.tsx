@@ -1,16 +1,15 @@
 import React, { DragEvent, MouseEvent, useEffect, useRef, useState } from 'react'
 import { ThemeProvider } from 'styled-components'
 
-import { instanceToast } from '@src/logic/ToastService'
+import { instanceToast } from '@services'
 import { 
   Delays,
-  Animations,
-  Positions
-} from '@src/constants'
-import { changeAnimation } from '@src/utils'
-import { ICreateToast } from '@src/interfaces'
+  Animations
+} from '@constants'
+import { changeAnimation } from '@utils'
+import { ICreateToast } from '@interfaces'
 
-import { defaultTheme } from '@src/styles/theme'
+import { defaultTheme } from '@styles'
 import {
   ToastWrapper,
   Logo,
@@ -51,11 +50,10 @@ export const Toast: React.FC<ICreateToast> = ({
         setTimeout(() => {
           setCurrentAnimation(changeAnimation(currentAnimation))
         }, delayForDelete - Delays.DEFAULT_ANIM_DELAY)
-        return () => clearTimeout(changeAnimTimeout.current as NodeJS.Timeout)
       }
-    })
+    }, [])
     
-    const handleDeleteClick = () => {
+    const handleDeleteClick = (e: MouseEvent) => {
       setCurrentAnimation(changeAnimation(currentAnimation))
       setTimeout(() => {
         if(story) setShow(false)
@@ -98,7 +96,7 @@ export const Toast: React.FC<ICreateToast> = ({
           position={position} 
           animation={currentAnimation}
           onMouseDown={onMouseDown}
-          onMouseMove={onMouseMove}
+          onMouseUp={onMouseMove}
         >
           <Logo type={type}/>
           <TextContainer type={type} textColor={textColor}>

@@ -13,8 +13,13 @@ module.exports = {
   webpackFinal: async (config, { configType }) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@src': path.resolve(__dirname, "../src"),
       '@components': path.resolve(__dirname, "../src/components"),
+      '@constants': path.resolve(__dirname, "../src/constants"),
+      '@interfaces': path.resolve(__dirname, "../src/interfaces"),
+      '@Portal': path.resolve(__dirname, "../src/Portal"),
+      '@services': path.resolve(__dirname, "../src/services"),
+      '@styles': path.resolve(__dirname, "../src/styles/theme"),
+      '@utils': path.resolve(__dirname, "../src/utils")
     };
 
     return config;

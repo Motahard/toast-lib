@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { Toast } from '.';
+import { Toast } from '@components/Toast';
 
 it('rendering toast', () => {
   const component = renderer.create(

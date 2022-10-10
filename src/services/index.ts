@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
-import { IRefUpdate, IToast } from '@src/interfaces';
-import { Delays } from '@src/constants';
+import { IRefUpdate, IToast } from '@interfaces';
+import { Delays } from '@constants';
 
 export class ToastService {
     private static instance: ToastService;

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
-import { IPortal } from '@src/interfaces'
+import { IPortal } from '@interfaces'
 
 export const Portal = ({ children }: IPortal) => {
 	const toastRoot = document.createElement('div')

@@ -1,13 +1,13 @@
 import styled from "styled-components"
-import { Positions } from '@src/constants'
+import { Positions } from '@constants'
 import { 
 	leftBottom, 
 	leftTop, 
 	rightBottom, 
 	rightTop 
-} from '@src/styles/theme'
+} from '@styles'
 
-import { IContainerForToasts } from '@src/interfaces'
+import { IContainerForToasts } from '@interfaces'
 
 export const ContainerForToasts = styled.div<IContainerForToasts>`
     display: flex;

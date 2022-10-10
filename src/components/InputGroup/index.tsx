@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { IInputGroup } from '@src/interfaces'
+import { IInputGroup } from '@interfaces'
 import { Input, InputContainer, InputTitle } from '@components/InputGroup/styled'
 
 export const InputGroup: FC<IInputGroup> = ({ type, name, value, onChange, description, placeholder }) => {

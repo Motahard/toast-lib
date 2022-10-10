@@ -1,2 +1,2 @@
-export { ToastContainer } from '@components/ToastContainer/ToastContainer'
-export { instanceToast } from '@src/logic/ToastService'
+export { ToastInit } from '@components/ToastInit'
+export { instanceToast } from '@services'

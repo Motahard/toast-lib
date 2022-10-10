@@ -1,4 +1,4 @@
-import { Animations } from '@src/constants'
+import { Animations } from '@constants'
 
 export const changeAnimation = (currentAnimation: string): string => {
 	switch (currentAnimation) {

@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-import { DefaultTheme } from '@src/interfaces'
+import { DefaultTheme } from '@interfaces'
 
 import error from '../assets/svg/error.svg'
 import info from '../assets/svg/info.svg'
@@ -9,7 +9,7 @@ import warning from '../assets/svg/warning.svg'
 import closeWhite from '../assets/svg/closeWhite.svg'
 import closeBlack from '../assets/svg/closeBlack.svg'
 
-export const svgObj = {
+export const images = {
 	error,
 	info,
 	success,
@@ -39,22 +39,27 @@ export const defaultTheme: DefaultTheme = {
 	},
 }
 
+const posTop = '20'
+const posBottom = '20'
+const posLeft = '20'
+const posRight = '20'
+
 export const leftTop = css`
-	top: 20px;
-	left: 20px;
+	top: ${posTop}px;
+	left: ${posLeft}px;
 `
 export const leftBottom = css`
-	bottom: 20px;
-	left: 20px;
+	bottom: ${posBottom}px;
+	left: ${posLeft}px;
 `
 
 export const rightTop = css`
-	top: 20px;
-	right: 20px;
+	top: ${posTop}px;
+	right: ${posRight}px;
 `
 export const rightBottom = css`
-	bottom: 20px;
-	right: 20px;
+	bottom: ${posBottom}px;
+	right: ${posRight}px;
 `
 
 export const font = css`

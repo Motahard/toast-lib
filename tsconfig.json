@@ -10,10 +10,15 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@src/*": ["src/*"]
+      "@components/*": ["components/*"],
+      "@constants": ["constants/"],
+      "@interfaces": ["interfaces/"],
+      "@services": ["services/"],
+      "@utils": ["utils/"],
+      "@Portal": ["Portal/"],
+      "@styles": ["styles/theme"]
     }
   },
   "include": ["src", "declaration.d.ts", "*.stories.tsx"],

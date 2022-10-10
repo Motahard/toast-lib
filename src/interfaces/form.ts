@@ -1,4 +1,4 @@
-import { IToast } from "@src/interfaces"
+import { IToast } from "@interfaces"
 import { ChangeEvent } from "react"
 
 export interface IFormToastContainer {
