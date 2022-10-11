@@ -12,7 +12,6 @@ import {
 	toTop,
 	images
 } from '@styles'
-
 import { 
 	IStyledToastWrapper, 
 	IStyledToast, 
@@ -25,12 +24,12 @@ export const ToastWrapper = styled.div<IStyledToastWrapper>`
 	display: flex;
 	align-items: center;
 	margin-bottom: 10px;
-	width: 300px;
-	height: 100px;
+	width: ${props => props.theme.toastWidth};
+	height: ${props => props.theme.toastHeight};
 	border-radius: 24px;
 	box-shadow: 4px 4px 8px #00000029;
 	opacity: 1;
-	padding: 16px;
+	padding: ${props =>  props.theme.spaces[2]}px;
 	transition: transform ${Delays.DEFAULT_ANIM_DELAY}ms ease-in;
 	&:hover {
 		cursor: grab;	
@@ -68,8 +67,8 @@ export const ToastWrapper = styled.div<IStyledToastWrapper>`
 	${toBottom};
 `
 export const Logo = styled.div<IStyledToast>`
-    height: 64px;
-	width: 64px;
+    height: ${props => props.theme.spaces[5]}px;
+	width: ${props => props.theme.spaces[5]}px;
 	${(props) => {
 		switch (props.type) {
 			case Types.INFO:
@@ -85,7 +84,7 @@ export const Logo = styled.div<IStyledToast>`
 `
 export const TextContainer = styled.div<IStyledToastText>`
 	height: auto;
-	margin-left: 16px;
+	margin-left: ${props => props.theme.spaces[2]}px;
 	color: ${(props) => {
 		if(props.textColor) {
 			return props.textColor
@@ -108,8 +107,8 @@ export const Description = styled.p`
 export const CloseButton = styled.div<IStyledToast>`
     cursor: pointer;
     position: absolute;
-	height: 32px;
-	width: 32px;
+	height: ${props => props.theme.spaces[4]}px;
+	width: ${props => props.theme.spaces[4]}px;
 	right: 29px;
 	top: 27px;
 	${(props) =>

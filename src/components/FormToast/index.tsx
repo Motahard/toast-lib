@@ -1,7 +1,16 @@
 import React, { ChangeEvent, Component, FormEvent } from 'react'
-import { Delays } from '@constants'
+import { 
+    Delays, 
+    inputNames, 
+    inputDescipription, 
+    inputPlaceholder 
+} from '@constants'
 import { instanceToast } from '@services'
-import { IFormToastProps, IFormToastState } from '@interfaces'
+import { 
+    IFormToastProps, 
+    IFormToastState, 
+    KeysStateInputs 
+} from '@interfaces'
 import { InputGroup } from '@components/InputGroup'
 import { SelectGroup } from '@components/SelectGroup'
 import { Form, Button } from '@components/FormToast/styled'
@@ -15,8 +24,8 @@ export default class FormToast extends Component<IFormToastProps, IFormToastStat
             description: '',
             backgroundColor: '',
             textColor: '',
-            autoDelete: true,
-            delayForDelete: Delays.DEFAULT_DELAY_DELETE
+            delayForDelete: Delays.DEFAULT_DELAY_DELETE,
+            autoDelete: true
         }
     }
 
@@ -37,6 +46,7 @@ export default class FormToast extends Component<IFormToastProps, IFormToastStat
     }
     
     render() {
+        
         return (
             <Form onSubmit={this.handleSubmit}>
                 <SelectGroup 
@@ -47,52 +57,23 @@ export default class FormToast extends Component<IFormToastProps, IFormToastStat
                     description='Type Toast*'
                     value={this.state.type}
                 />
-                <InputGroup 
-                    type='text' 
-                    name='title' 
-                    value={this.state.title} 
-                    onChange={this.handleChange} 
-                    description='Toast Title*'
-                    placeholder='Enter toast title'
-                />
-                <InputGroup 
-                    type='text' 
-                    name='description' 
-                    value={this.state.description} 
-                    onChange={this.handleChange} 
-                    description='Toast Description (optional)'
-                    placeholder='Enter toast description'
-                />
-                <InputGroup 
-                    type='text' 
-                    name='backgroundColor' 
-                    value={this.state.backgroundColor} 
-                    onChange={this.handleChange} 
-                    description='Background Color (optional)'
-                    placeholder='Enter toast background color'
-                />
-                <InputGroup 
-                    type='text' 
-                    name='textColor' 
-                    value={this.state.textColor} 
-                    onChange={this.handleChange} 
-                    description='Text Color (optional)'
-                    placeholder='Enter toast text color'
-                />
+                {inputNames.map((item, index) => ( 
+                    <InputGroup 
+                        key={item}
+                        type='text'
+                        name={item}
+                        onChange={this.handleChange} 
+                        value={this.state[item as KeysStateInputs]} 
+                        description={inputDescipription[index]} 
+                        placeholder={inputPlaceholder[index]}
+                    /> 
+                ))}
                 <InputGroup 
                     type='checkbox' 
                     name='autoDelete' 
                     value={(this.state.autoDelete)?.toString()} 
                     onChange={this.handleChange} 
                     description='No autodelete'
-                />
-                <InputGroup 
-                    type='text' 
-                    name='delayForDelete' 
-                    value={this.state.delayForDelete} 
-                    onChange={this.handleChange} 
-                    description='Delay For Delete'
-                    placeholder='Enter toast delay for delete'
                 />
                 <Button type='submit'>
                      Add

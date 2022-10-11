@@ -24,6 +24,13 @@ const lilac = '#9A40D3'
 const yellow = '#F4E048'
 const red = '#E25837'
 const green = '#37E29A'
+const posTop = '20'
+const posBottom = '20'
+const posLeft = '20'
+const posRight = '20'
+const toastWidth = '300px'
+const toastHeight = '100px'
+const spaces = [0, 8, 16, 24, 32, 64]
 
 export const defaultTheme: DefaultTheme = {
 	type: {
@@ -32,17 +39,15 @@ export const defaultTheme: DefaultTheme = {
 		error: red,
 		success: green,
 	},
-
 	textColor: {
 		white,
 		black
 	},
+	toastWidth,
+	toastHeight,
+	spaces
 }
 
-const posTop = '20'
-const posBottom = '20'
-const posLeft = '20'
-const posRight = '20'
 
 export const leftTop = css`
 	top: ${posTop}px;

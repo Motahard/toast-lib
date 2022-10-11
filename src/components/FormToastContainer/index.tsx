@@ -1,5 +1,11 @@
 import React, { ChangeEvent, FC } from 'react'
 import { IFormToastContainer } from '@interfaces'
+import { 
+    selectDescriptions, 
+    selectDescripValues, 
+    selectNames, 
+    selectValues 
+} from '@constants'
 import { InputGroup } from '@components/InputGroup'
 import { SelectGroup } from '@components/SelectGroup'
 import { Form } from '@components/FormToast/styled'
@@ -20,23 +26,27 @@ const FormToastContainer: FC<IFormToastContainer> = ({ setAnimation, setPosition
         setSpace(value)
     }
 
+    const handlers = [handlePositionChange, handleAnimationChange]
     return (
         <Form>
-            <SelectGroup 
-                name='position' 
-                values={[ 'RIGHT_TOP', 'LEFT_TOP', 'LEFT_BOTTOM', 'RIGHT_BOTTOM']} 
-                valuesDescription={['Right Top', 'Left Top', 'Left Bottom', 'Right Bottom']}
-                onChange={handlePositionChange}
-                description='Position'
+            {selectNames.map((item, index) => (
+                <SelectGroup 
+                    key={item}
+                    name={item}
+                    values={selectValues[index]}
+                    valuesDescription={selectDescripValues[index]}
+                    onChange={handlers[index]}
+                    description={selectDescriptions[index]}
+                />
+            ))}
+            <InputGroup 
+                type='text' 
+                name='space' 
+                value={space} 
+                onChange={handleSpaceChange} 
+                description='Toast Space (px)' 
+                placeholder='Enter toast space in px'
             />
-            <SelectGroup 
-                name='animation' 
-                values={['FROM_RIGHT', 'FROM_LEFT', 'FROM_TOP', 'FROM_BOTTOM']} 
-                valuesDescription={['From Right', 'From Left', 'From Top', 'From Bottom']}
-                onChange={handleAnimationChange}
-                description='Animation'
-            />
-            <InputGroup type='text' name='space' value={space} onChange={handleSpaceChange} description='Toast Space (px)' placeholder='Enter toast space in px'/>
         </Form>
   )
 }

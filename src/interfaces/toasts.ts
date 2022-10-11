@@ -30,11 +30,13 @@ export interface DefaultTheme {
       error: string,
       success: string,
     },
-  
     textColor: {
       white: string,
       black: string,
     },
+    toastWidth: string
+    toastHeight: string
+    spaces: number[]
 }
 
 export interface IContainerForToasts {

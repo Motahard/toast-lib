@@ -14,7 +14,7 @@ export interface IFormToastState extends Omit<IToast, 'id'> {}
 export interface IInputGroup {
     type: string
     name: string
-    value: string | undefined | number
+    value: string | undefined | number 
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
     description: string
     placeholder?: string
@@ -28,3 +28,5 @@ export interface ISelectGroup {
     description: string
     value?: string
 }
+
+export type KeysStateInputs = keyof Omit<IFormToastState, 'autoDelete'>

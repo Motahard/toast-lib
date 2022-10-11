@@ -27,3 +27,50 @@ export enum Delays {
     DEFAULT_DELAY_DELETE = 3000,
     DEFAULT_ANIM_DELAY = 1000
 }
+
+export const inputNames: string[] = [
+    'title', 
+    'description', 
+    'backgroundColor', 
+    'textColor', 
+    'delayForDelete'
+]
+
+export const inputDescipription: string[] = [
+    'Toast Title*', 
+    'Toast Description (optional)', 
+    'Background Color (optional)', 
+    'Text Color (optional)', 
+    'Delay For Delete'
+]
+
+export const inputPlaceholder: string[] = [
+    'Enter toast title', 
+    'Enter toast description', 
+    'Enter toast background color', 
+    'Enter toast text color', 
+    'Enter toast delay for delete'
+]
+
+export const selectNames: string[] = ['position','animation']
+export const selectDescriptions: string[] = ['Position','Animation']
+export const selectValues: [string[], string[]] = [
+    ['RIGHT_TOP',
+    'LEFT_TOP', 
+    'LEFT_BOTTOM', 
+    'RIGHT_BOTTOM'],
+    ['FROM_RIGHT', 
+    'FROM_LEFT', 
+    'FROM_TOP', 
+    'FROM_BOTTOM']
+]
+export const selectDescripValues: [string[], string[]] = [
+    ['Right Top', 
+    'Left Top', 
+    'Left Bottom', 
+    'Right Bottom'],
+    ['From Right', 
+    'From Left', 
+    'From Top', 
+    'From Bottom']
+]
